@@ -1,0 +1,79 @@
+<apex:page controller="RG_ExportMultiSheetCtrl"  contentType="txt/xml#myData-{!now()}.xls" cache="false">
+<apex:outputText value="{!xlsHeader}"/>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ 
+ <!-- STYLES -->
+  <Styles>
+  
+  <!-- STYLE ID = S1 STARTS -->
+ <Style ss:ID="s1">
+ <Alignment ss:Vertical="Top"/>
+ <Borders/>
+ <Font ss:Bold="1"/>
+ <Interior/>
+ <NumberFormat/>
+ <Protection/>
+ </Style>
+ 
+   <!-- STYLE ID = S1 ENDS -->
+ </Styles>
+ 
+ <!-- STYLES -->
+ 
+ 
+  <!-- (ACCOUNT TAB STARTs  -->
+ <Worksheet ss:Name="Accounts"> 
+ <Table x:FullColumns="1" x:FullRows="1">
+ <Column ss:Width="170"/>
+ 
+  <Row>
+     
+        <Cell ss:StyleID="s1"><Data ss:Type="String" >Account ID</Data></Cell>
+         <Cell><Data ss:Type="String" >Account Name</Data></Cell>
+       
+ </Row>
+ 
+ <apex:repeat value="{!allAccounts}" var="acc">
+ <Row>
+     
+        <Cell ss:StyleID="s1"><Data ss:Type="String" > {!acc.ID}</Data></Cell>
+         <Cell><Data ss:Type="String" > {!acc.Name}</Data></Cell>
+       
+ </Row>
+ </apex:repeat>
+  
+</Table>
+</Worksheet>
+  <!-- (ACCOUNT TAB ENDS  -->
+ 
+ 
+ <!-- Contacts TAB STARTS -->
+ <Worksheet ss:Name="Contacts">
+ <Table x:FullColumns="1" x:FullRows="1">
+ <Column ss:Width="170"/>
+ 
+   <Row>
+     
+        <Cell ss:StyleID="s1"><Data ss:Type="String" >Contact ID</Data></Cell>
+         <Cell><Data ss:Type="String" >Contact Name</Data></Cell>
+       
+ </Row>
+ 
+<apex:repeat value="{!allContacts}" var="con">
+     <Row> 
+       
+        <Cell ss:StyleID="s1"><Data ss:Type="String" > {!con.ID}</Data></Cell>
+         <Cell><Data ss:Type="String" > {!con.Name}</Data></Cell>
+        
+     </Row>
+     </apex:repeat>
+ </Table>
+ </Worksheet>
+ <!-- Contacts TAB ENDS -->
+ 
+ </Workbook>
+</apex:page>
